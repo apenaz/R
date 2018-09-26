@@ -1,0 +1,20 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Questão	02.	Considere	o	arquivo	RELATORIO_DTB_BRASIL_MUNICIPIO.xls	contendo	dados	do	IBGE	sobre	os	municípios	brasileiros.	Inspecione	os	dados	destes	dataset	e	apresente	scripts	em	R	que	permitam	extrair	as	seguintes	informações:
+```{r}
+install.packages("readxl")
+library("readxl")
+relatorio <- read_excel("RELATORIO_DTB_BRASIL_MUNICIPIO.xls",na = "---", fileEncoding="Windows-1252")
+tail(relatorio)
+```
+
+
+
+a) A	lista	com	os	nomes	de	todos	os	municípios	do	Rio	Grande	do	Norte	e	que	estejam incluídos	na	Região	do	Seridó	(Oriental	e Ocidental).
+b) A	quantidade	de	municípios	do	Rio	Grande	do	Norte	que	estejam inseridos	na	mesma Microrregião	e	Mesorregião	geográficas	da	cidade	de Natal.
+c) Um	gráfico	(barras	ou	histograma)	com	a	quantidade	de	municípios	por área.
+d) Um	gráfico	(Barras	ou	Histograma)	mostrando	o	número	de	municípios	por	região	do Brasil.
+e) Um	gráfico	(barras	ou	histograma)	mostrando	a	quantidade	média	de	municípios	por	estado	em	cada	região	do	brasil.	Modifique	o	seu	script	para	plotar,	em	um	mesmo	gráfico,	um	conjunto	de	boxplot	para	região.

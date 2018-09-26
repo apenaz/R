@@ -1,0 +1,31 @@
+---
+title: "R Notebook for exercise list"
+output:
+  html_document:
+    df_print: paged
+---
+
+###01.
+Considere	o	arquivo	Nascimentos_RN.csv	como	um	dataset	contendo	dados	sobre	a	quantidade	de	nascimentos	no	estado	do	Rio	Grande	do	Norte,	no	período	de	1994	a	2014.	Inspecione	os	dados	deste	dataset	e	apresente	scripts	em	R	que	permitam extrair	as seguintes	informações:
+a) Qual	munícipio	apresentou	a	*maior	queda	no	número	de nascimentos*,	quando comparados	os	números	de	2013	e 2014?
+Resposta: Primeiro colocamos o dataset lido em uma variável para que possamos manipulá-lo. Depois buscamos qual deles teve a menor queda no período comparando a diferença entre os períodos solicitados na questão.
+
+# fileEncoded indica o padrão que foi usado na codificação dos caracteres. o mais comum e windows ou UTF; usado o read.csv2 devido o separador ser o ";"
+# Inicia da segunda coluna por ser a que contem os valores e percorre até a ultima coluna
+#converte as colunas que estão em variáveis categóricas em numéricas
+```{r}
+require(readr)
+nascimento = read.csv2("Nascimentos_RN.csv", header=TRUE,fileEncoding="Windows-1252", nrows = 169) 
+for (i in 2:length(nascimento[1,])){nascimento[[i]] = as.numeric(as.character(nascimento[[i]]))}
+for (i in 1:length(nascimento[1,])){natal = nascimento$X1994[[i]]}
+tail(nascimento)
+```
+```{r}
+menor = nascimento[[3]]-nascimento[[2]]
+order(menor)
+
+maior_queda_idx = min(menor,na.rm=TRUE) #cria um vetor com as diferenças
+nascimento$Município[maior_queda_idx]
+print(menor)
+```
+
