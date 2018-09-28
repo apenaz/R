@@ -1,20 +1,49 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output: "Questão_2"
 ---
 
 Questão	02.	Considere	o	arquivo	RELATORIO_DTB_BRASIL_MUNICIPIO.xls	contendo	dados	do	IBGE	sobre	os	municípios	brasileiros.	Inspecione	os	dados	destes	dataset	e	apresente	scripts	em	R	que	permitam	extrair	as	seguintes	informações:
 ```{r}
-install.packages("readxl")
+#install.packages("readxl")
 library("readxl")
-relatorio <- read_excel("RELATORIO_DTB_BRASIL_MUNICIPIO.xls",na = "---", fileEncoding="Windows-1252")
-tail(relatorio)
+
+relatorio = read_excel(file.choose())
+relatorio
 ```
 
 
 
 a) A	lista	com	os	nomes	de	todos	os	municípios	do	Rio	Grande	do	Norte	e	que	estejam incluídos	na	Região	do	Seridó	(Oriental	e Ocidental).
+
+```{r}
+RN = subset(relatorio, relatorio$UF == "24")
+RN_serido = subset(RN, RN$`Microrregião Geográfica`=="011" | RN$`Microrregião Geográfica`=="012")
+
+RN_serido$Nome_Município
+
+```
+
 b) A	quantidade	de	municípios	do	Rio	Grande	do	Norte	que	estejam inseridos	na	mesma Microrregião	e	Mesorregião	geográficas	da	cidade	de Natal.
-c) Um	gráfico	(barras	ou	histograma)	com	a	quantidade	de	municípios	por área.
+```{r}
+Natal = subset(RN, RN$Nome_Município == "Natal")
+municipio_mesmo_natal = subset(RN, RN$`Microrregião Geográfica` == Natal$`Microrregião Geográfica` & RN$`Mesorregião Geográfica` == Natal$`Mesorregião Geográfica`)
+municipio_mesmo_natal
+```
+
+c) Um	gráfico	(barras	ou	histograma)	com	a	quantidade	de	municípios	por ~(área)~ microregião.
+```{r}
+
+
+```
+
 d) Um	gráfico	(Barras	ou	Histograma)	mostrando	o	número	de	municípios	por	região	do Brasil.
+```{r} 
+regiao = (as.numeric(relatorio$UF)%/%10)
+hist(regiao, col=rgb(0.1,0.5,0.1),main="Distribuição de municípios	por	região	do Brasil", xlab="Regiões", ylab="Nº de municípios")
+```
+
 e) Um	gráfico	(barras	ou	histograma)	mostrando	a	quantidade	média	de	municípios	por	estado	em	cada	região	do	brasil.	Modifique	o	seu	script	para	plotar,	em	um	mesmo	gráfico,	um	conjunto	de	boxplot	para	região.
+```{r}
+
+```

@@ -1,0 +1,34 @@
+---
+title: "R Notebook"
+output: "Questão03"
+---
+
+*Questão 03.* Considere o conjunto de arquivos (POPTBR15.DBF, POPTBR14.DBF e POPTBR13.csv) como sendo a sua base de dados sobre “População Residente: Censos, Contagens Populacionais e Projeções Intercensitárias”. A descrição sobre os dados pode ser encontrada no arquivo população.pdf. Inspecione os dados destes datasets, faça uma junção (merge) dos datasets e apresente scripts em R que permitam:
+
+a) Mostrar, através de um gráfico de barras, a comparação do crescimento da população entre as três cidades com maior população no período de 2013 à 2015.
+```{r}
+data13 <- data.frame(read.csv("POPTBR13.csv"))
+data14 <- data.frame(read.dbf("POPTBR14.DBF", as.is = TRUE))
+data15 <- data.frame(read.dbf("POPTBR15.DBF", as.is = TRUE))
+
+data <- data.frame(data13$MUNIC_RES)
+data$p13 <- data13$POPULACAO
+data$p14 <- data14$POPULACAO
+data$p15 <- data15$POPULACAO
+
+idx_maior13 <- order(data13$POPULACAO)
+maior1 = dat
+maior1
+maior2 =
+barplot()
+
+```
+
+b) Mostrar, através um gráfico de barras, a comparação do crescimento da população entre as três com menor população no período de 2013 à 2015.
+
+c) Mostre através de gráficos boxplot, por região, dados do crescimento populacional médio.
+```{r}
+
+
+```
+
